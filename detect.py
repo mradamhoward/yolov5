@@ -93,6 +93,10 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
         bs = 1  # batch_size
     vid_path, vid_writer = [None] * bs, [None] * bs
 
+    cars = 0
+    trucks = 0
+
+
     # Run inference
     if pt and device.type != 'cpu':
         model(torch.zeros(1, 3, imgsz, imgsz).to(device).type_as(next(model.parameters())))  # run once
@@ -141,8 +145,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                 
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
                 
-                cars = 0
-                trucks = 0
+                
 
                 for box in det:
                     print(box)
