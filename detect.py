@@ -141,7 +141,7 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
                 
                 for box in det:
-                    print(box.numpy()[1])
+                    print(box.cpu().detach().numpy()[1])
 
                 
 
