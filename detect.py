@@ -139,6 +139,8 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
             if len(det):
                 # Rescale boxes from img_size to im0 size
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
+                
+                print(det[:, :4])
 
                 # Print results
                 for c in det[:, -1].unique():
