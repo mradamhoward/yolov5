@@ -138,10 +138,11 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
             imc = im0.copy() if save_crop else im0  # for save_crop
             if len(det):
                 # Rescale boxes from img_size to im0 size
-                det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
-                
                 for box in det:
                     print(box.cpu().detach().numpy()[1])
+                det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
+                
+                
 
                 
 
