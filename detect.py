@@ -141,9 +141,22 @@ def run(weights='yolov5s.pt',  # model.pt path(s)
                 
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
                 
+                cars = 0
+                trucks = 0
+
                 for box in det:
                     print(box)
-                    print(str(box.cpu().detach().numpy()[1]) + " " + str(box.cpu().detach().numpy()[3]))
+                    ymin = box.cpu().detach().numpy()[1]
+                    ymax = box.cpu().detach().numpy()[3]
+
+                    if(ymax < (768 / 2) or ymin < (768 / 2)):
+                        if(int(box.cpu().detach().numpy()[5]) == 2):
+                            cars += 1
+                            print("Cars: " + str(cars))
+                        elif (int(box.cpu().detach().numpy()[5]) == 7):
+                            trucks += 1
+                            print("Trucks: " + str(trucks))
+
 
                 
 
